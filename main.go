@@ -295,13 +295,12 @@ func renderText(r Report) string {
 	fmt.Fprintf(&b, "Elapsed: %s\n", r.FinishedAt.Sub(r.StartedAt).Round(time.Millisecond))
 
 	if r.ClientInfo != nil {
-		loc := strings.Join(nonEmpty(r.ClientInfo.City, r.ClientInfo.RegionName, r.ClientInfo.Country), ", ")
 		b.WriteString("\n=== Your outgoing connection ===\n")
-		fmt.Fprintf(&b, "IP:       %s\n", orDash(r.ClientInfo.Query))
-		fmt.Fprintf(&b, "ISP:      %s\n", orDash(r.ClientInfo.ISP))
-		fmt.Fprintf(&b, "Org:      %s\n", orDash(r.ClientInfo.Org))
-		fmt.Fprintf(&b, "AS:       %s\n", orDash(r.ClientInfo.AS))
-		fmt.Fprintf(&b, "Location: %s\n", orDash(loc))
+		fmt.Fprintf(&b, "IP:      %s\n", orDash(r.ClientInfo.Query))
+		fmt.Fprintf(&b, "ISP:     %s\n", orDash(r.ClientInfo.ISP))
+		fmt.Fprintf(&b, "Org:     %s\n", orDash(r.ClientInfo.Org))
+		fmt.Fprintf(&b, "AS:      %s\n", orDash(r.ClientInfo.AS))
+		fmt.Fprintf(&b, "Country: %s\n", orDash(r.ClientInfo.Country))
 	}
 
 	for _, ipr := range r.IPs {
@@ -309,11 +308,10 @@ func renderText(r Report) string {
 		fmt.Fprintf(&b, "=== %s ===\n", ipr.IP)
 
 		if ipr.Info != nil {
-			loc := strings.Join(nonEmpty(ipr.Info.City, ipr.Info.RegionName, ipr.Info.Country), ", ")
-			fmt.Fprintf(&b, "ISP:      %s\n", orDash(ipr.Info.ISP))
-			fmt.Fprintf(&b, "Org:      %s\n", orDash(ipr.Info.Org))
-			fmt.Fprintf(&b, "AS:       %s\n", orDash(ipr.Info.AS))
-			fmt.Fprintf(&b, "Location: %s\n", orDash(loc))
+			fmt.Fprintf(&b, "ISP:     %s\n", orDash(ipr.Info.ISP))
+			fmt.Fprintf(&b, "Org:     %s\n", orDash(ipr.Info.Org))
+			fmt.Fprintf(&b, "AS:      %s\n", orDash(ipr.Info.AS))
+			fmt.Fprintf(&b, "Country: %s\n", orDash(ipr.Info.Country))
 		} else if ipr.InfoError != "" {
 			fmt.Fprintf(&b, "ISP/geo:  lookup failed (%s)\n", ipr.InfoError)
 		}
@@ -357,16 +355,6 @@ func orDash(s string) string {
 		return "-"
 	}
 	return s
-}
-
-func nonEmpty(vals ...string) []string {
-	out := make([]string, 0, len(vals))
-	for _, v := range vals {
-		if v != "" {
-			out = append(out, v)
-		}
-	}
-	return out
 }
 
 func listFingerprints() string {
