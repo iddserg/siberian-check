@@ -10,14 +10,14 @@ import (
 
 // fingerprints mirrors the set supported by dpi-ch's siberian-fingerprint option.
 var fingerprints = map[string]tls.ClientHelloID{
-	"chrome":  tls.HelloChrome_Auto,
-	"firefox": tls.HelloFirefox_Auto,
-	"safari":  tls.HelloSafari_Auto,
-	"ios":     tls.HelloIOS_Auto,
+	"chrome":  tls.HelloChrome_133,
+	"firefox": tls.HelloFirefox_120,
+	"safari":  tls.HelloSafari_16_0,
+	"ios":     tls.HelloIOS_14,
 	"android": tls.HelloAndroid_11_OkHttp,
-	"edge":    tls.HelloEdge_Auto,
-	"360":     tls.Hello360_Auto,
-	"qq":      tls.HelloQQ_Auto,
+	"edge":    tls.HelloEdge_85,
+	"360":     tls.Hello360_7_5,
+	"qq":      tls.HelloQQ_11_1,
 }
 
 func fingerprintNames() []string {

@@ -39,12 +39,14 @@ instead of tripping over state left by a previous run.
 ## Build
 
 ```bash
-cd /Users/nserg/projects/connectTest/siberian-check
+cd siberian-check
 go build -o siberian-check .
 ```
 
-Requires Go 1.24+. Dependencies: `github.com/refraction-networking/utls`,
-`golang.org/x/sync`.
+Requires Go 1.25+. Dependencies: `github.com/refraction-networking/utls`,
+`golang.org/x/sync`. TLS fingerprints use the fixed versions from
+[dpi-ch](https://github.com/hyperion-cs/dpi-checkers/blob/main/ru/dpi-ch/inetutil/tls.go)
+(upstream commit `bb14a51`) so results stay comparable across runs.
 
 ## Usage
 
@@ -53,25 +55,25 @@ AAAA) and tests every supported TLS fingerprint against each one (maximum
 coverage), printing a plain-text report:
 
 ```bash
-/Users/nserg/projects/connectTest/siberian-check/siberian-check -domain example.com
+./siberian-check -domain example.com
 ```
 
 Add `-json` for a machine-readable report instead of text:
 
 ```bash
-/Users/nserg/projects/connectTest/siberian-check/siberian-check -domain example.com -json -output result.json
+./siberian-check -domain example.com -json -output result.json
 ```
 
 Test one specific IP with one fingerprint and a custom connection count:
 
 ```bash
-/Users/nserg/projects/connectTest/siberian-check/siberian-check -ip 178.72.128.17 -fingerprint chrome -conn-count 6
+./siberian-check -ip 178.72.128.17 -fingerprint chrome -conn-count 6
 ```
 
 See progress while it runs:
 
 ```bash
-/Users/nserg/projects/connectTest/siberian-check/siberian-check -domain example.com -verbose
+./siberian-check -domain example.com -verbose
 ```
 
 ### Flags
@@ -99,7 +101,7 @@ See progress while it runs:
 Include a traceroute to each tested IP (off by default, adds latency):
 
 ```bash
-/Users/nserg/projects/connectTest/siberian-check/siberian-check -domain example.com -traceroute
+./siberian-check -domain example.com -traceroute
 ```
 
 ## Output
