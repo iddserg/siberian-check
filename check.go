@@ -17,14 +17,15 @@ type attempt struct {
 
 // SiberianResult is one fingerprint's test outcome against a single IP.
 type SiberianResult struct {
-	Fingerprint string    `json:"fingerprint"`
-	ConnCount   int       `json:"conn_count"`
-	Alpha       attempt   `json:"alpha"`
-	Beta        attempt   `json:"beta"`
-	RetriedReal bool      `json:"retried_with_real_sni"`
-	Detected    bool      `json:"siberian_detected"`
-	DurationMs  int64     `json:"duration_ms"`
-	StartedAt   time.Time `json:"started_at"`
+	Fingerprint        string    `json:"fingerprint"`
+	FingerprintVersion string    `json:"fingerprint_version"`
+	ConnCount          int       `json:"conn_count"`
+	Alpha              attempt   `json:"alpha"`
+	Beta               attempt   `json:"beta"`
+	RetriedReal        bool      `json:"retried_with_real_sni"`
+	Detected           bool      `json:"siberian_detected"`
+	DurationMs         int64     `json:"duration_ms"`
+	StartedAt          time.Time `json:"started_at"`
 }
 
 type checkOpt struct {
@@ -49,9 +50,10 @@ func runSiberianCheck(opt checkOpt) SiberianResult {
 	fp := fingerprints[opt.FingerprintKey]
 
 	res := SiberianResult{
-		Fingerprint: opt.FingerprintKey,
-		ConnCount:   opt.ConnCount,
-		StartedAt:   start,
+		Fingerprint:        opt.FingerprintKey,
+		FingerprintVersion: fp.Version,
+		ConnCount:          opt.ConnCount,
+		StartedAt:          start,
 	}
 
 	alphaSni := randomHostname()

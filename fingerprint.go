@@ -8,11 +8,11 @@ import (
 	tls "github.com/refraction-networking/utls"
 )
 
-// fingerprints mirrors the set supported by dpi-ch's siberian-fingerprint option.
+// fingerprints uses explicit versions from the pinned uTLS dependency.
 var fingerprints = map[string]tls.ClientHelloID{
 	"chrome":  tls.HelloChrome_133,
-	"firefox": tls.HelloFirefox_120,
-	"safari":  tls.HelloSafari_16_0,
+	"firefox": tls.HelloFirefox_148,
+	"safari":  tls.HelloSafari_26_3,
 	"ios":     tls.HelloIOS_14,
 	"android": tls.HelloAndroid_11_OkHttp,
 	"edge":    tls.HelloEdge_85,

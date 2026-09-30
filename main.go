@@ -326,15 +326,15 @@ func renderText(r Report) string {
 		}
 
 		b.WriteString("Checks:\n")
-		fmt.Fprintf(&b, "  %-8s  %-6s  %-9s  %-22s  %-22s  %s\n",
+		fmt.Fprintf(&b, "  %-16s  %-6s  %-9s  %-22s  %-22s  %s\n",
 			"FINGRPT", "CONN", "SIBERIAN", "ALPHA ERR", "BETA ERR", "TIME")
 		for _, c := range ipr.Checks {
 			verdict := "no"
 			if c.Detected {
 				verdict = "YES"
 			}
-			fmt.Fprintf(&b, "  %-8s  %-6d  %-9s  %-22s  %-22s  %dms\n",
-				c.Fingerprint, c.ConnCount, verdict, orDash(c.Alpha.Error), orDash(c.Beta.Error), c.DurationMs)
+			fmt.Fprintf(&b, "  %-16s  %-6d  %-9s  %-22s  %-22s  %dms\n",
+				c.Fingerprint+"/"+c.FingerprintVersion, c.ConnCount, verdict, orDash(c.Alpha.Error), orDash(c.Beta.Error), c.DurationMs)
 		}
 	}
 
