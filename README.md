@@ -43,9 +43,10 @@ cd siberian-check
 go build -o siberian-check .
 ```
 
-Requires Go 1.26+. Dependencies: `github.com/refraction-networking/utls`,
-`golang.org/x/sync`. uTLS is pinned to commit `88ba76ae4ee3` (2026-09-24).
-The latest available templates in this dependency are Chrome 133, Safari 26.3,
+Requires Go 1.27+. Dependencies: `github.com/refraction-networking/utls`,
+`golang.org/x/sync`. uTLS is pinned to commit `ff1b50fbbe9a` (2026-10-06),
+checked against upstream on 2026-11-05.
+The latest available templates in this dependency are Chrome 155, Safari 26.3,
 and Firefox 148. Other families retain their supported templates; Edge 85 and
 360 7.5 remain selected because uTLS flags their newer templates as incompatible.
 These are simulated ClientHello templates, not the browser installed on your device.
