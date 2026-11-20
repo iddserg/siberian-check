@@ -10,7 +10,7 @@ import (
 
 // fingerprints uses explicit versions from the pinned uTLS dependency.
 var fingerprints = map[string]tls.ClientHelloID{
-	"chrome":  tls.HelloChrome_133,
+	"chrome":  tls.HelloChrome_155,
 	"firefox": tls.HelloFirefox_148,
 	"safari":  tls.HelloSafari_26_3,
 	"ios":     tls.HelloIOS_14,
