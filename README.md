@@ -44,8 +44,9 @@ go build -o siberian-check .
 ```
 
 Requires Go 1.27+. Dependencies: `github.com/refraction-networking/utls`,
-`golang.org/x/sync`. uTLS is pinned to commit `ff1b50fbbe9a` (2026-10-06),
-checked against upstream on 2026-11-05.
+`golang.org/x/sync`. uTLS is pinned to commit `360383f893fb` (2026-11-18),
+checked against upstream on 2026-11-20. This includes a fix for TLS handshakes
+where a server selects a non-first classical key share (including Firefox).
 The latest available templates in this dependency are Chrome 155, Safari 26.3,
 and Firefox 148. Other families retain their supported templates; Edge 85 and
 360 7.5 remain selected because uTLS flags their newer templates as incompatible.
